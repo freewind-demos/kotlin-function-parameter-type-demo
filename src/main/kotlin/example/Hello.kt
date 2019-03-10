@@ -1,7 +1,18 @@
 package example
 
+interface Event
+class MouseEvent : Event
+class KeyboardEvent : Event
+
+fun onEvent(event: Event) {}
+
 fun main(args: Array<String>) {
-    println(hello("Kotlin"))
+    onEvent(MouseEvent())
+
+    val onEvents: MutableMap<String, (Event) -> Unit> = mutableMapOf()
+
+    // Can't be `MouseEvent`
+    onEvents["click"] = { event: Event -> }
+
 }
 
-fun hello(name: String): String = "Hello, $name!"
